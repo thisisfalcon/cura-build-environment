@@ -21,12 +21,12 @@ else()
     # Windows available depends on numpy with MKL, we also need the binary package for that.
     if( BUILD_OS_WIN32 )
         add_custom_target(PythonShapely
-            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely‑1.6.4.post1‑cp35‑cp35m‑win32.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely‑1.6.4.post1‑cp36‑cp36m‑win32.whl
             COMMENT "Installing Python-Shapely"
         )
     else()
         add_custom_target(PythonShapely
-            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely‑1.6.4.post1‑cp35‑cp35m‑win_amd64.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely‑1.6.4.post1‑cp36‑cp36m‑win_amd64.whl
             COMMENT "Installing Python-Shapely"
         )
     endif()
