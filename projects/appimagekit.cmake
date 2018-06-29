@@ -1,7 +1,7 @@
 if(BUILD_OS_LINUX)
     ExternalProject_Add(AppImageKit
         GIT_REPOSITORY https://github.com/AppImage/AppImageKit.git
-        GIT_TAG e61010ba9f475abdb90992e7315c0dde2ccc01d7
+        GIT_TAG a01f60bb728af07a73644e677d73467985e8dca7
         GIT_SUBMODULES cmake/sanitizers-cmake
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
         INSTALL_COMMAND ""
