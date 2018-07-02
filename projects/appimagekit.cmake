@@ -21,4 +21,6 @@ if(BUILD_OS_LINUX)
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/src/appimagetool ${CMAKE_INSTALL_PREFIX}/bin/
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/src/AppRun       ${CMAKE_INSTALL_PREFIX}/bin/
     )
+
+    add_dependencies(AppImageKit glib)
 endif()
