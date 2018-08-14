@@ -1,5 +1,5 @@
 set(python_patch_command "")
-set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-optimizations --enable-ipv6 --with-threads --without-pymalloc)
+set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --with-threads --without-pymalloc)
 set(python_build_command make)
 set(python_install_command make install)
 
@@ -10,7 +10,7 @@ if(BUILD_OS_OSX)
     # Since OS X 10.11, System Integrity Protection (SIP) is introduced to enhance security. It clears
     # DYLD_LIBRARY_PATH for all sub-processes so now setting DYLD_LIBRARY_PATH won't work. We now compile
     # Python by linking to the OS X framework to avoid this problem.
-    set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-framework --disable-shared --enable-optimizations --enable-ipv6 --with-threads --without-pymalloc)
+    set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-universalsdk --enable-ipv6 --with-threads --without-pymalloc)
     # OS X 10.11 removed OpenSSL. Brew now refuses to link so we need to manually tell Python's build system
     # to use the right linker flags.
     set(python_configure_command CPPFLAGS=-I/usr/local/opt/openssl/include LDFLAGS=-L/usr/local/opt/openssl/lib PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig ${python_configure_command})
