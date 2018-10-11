@@ -2,6 +2,7 @@
 
 export MACOSX_DEPLOYMENT_TARGET=10.7
 export CMAKE_OSX_DEPLOYMENT_TARGET=10.7
+export CMAKE_CXX_FLAGS="-stdlib=libc++"
 export CC=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 export CXX=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 export CPATH="/usr/local/opt/openssl/include:/usr/local/opt/sqlite/include:$CPATH"
