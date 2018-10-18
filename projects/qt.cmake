@@ -1,6 +1,12 @@
-#set(qt_url http://software.ultimaker.com/cura-binary-dependencies/qt-everywhere-src-5.10.1.tar.xz)
-set(qt_url https://download.qt.io/archive/qt/5.10/5.10.1/single/qt-everywhere-src-5.10.1.tar.xz)
-set(qt_md5 7e167b9617e7bd64012daaacb85477af)
+if (QT_VERSION STREQUAL "5.8")
+    set(qt_url https://download.qt.io/archive/qt/5.8/5.8.0/single/qt-everywhere-opensource-src-5.8.0.tar.xz)
+    set(qt_md5 66660cd3d9e1a6fed36e88adcb72e9fe)
+elseif (QT_VERSION STREQUAL "5.10")
+    set(qt_url https://download.qt.io/archive/qt/5.10/5.10.1/single/qt-everywhere-src-5.10.1.tar.xz)
+    set(qt_md5 7e167b9617e7bd64012daaacb85477af)
+else ()
+    message (FATAL_ERROR "QT_VERSION ${QT_VERSION} is not supported.")
+endif ()
 
 if(BUILD_OS_WINDOWS)
     # For some as of yet unknown reason, building Qt on Windows fails because it does not create moc targets.

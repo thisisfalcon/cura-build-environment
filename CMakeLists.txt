@@ -9,6 +9,12 @@ if(NOT CURA_SAVITAR_BRANCH_OR_TAG)
     set(CURA_SAVITAR_BRANCH_OR_TAG "master")
 endif()
 
+# Option to set the Qt version to use. Only 5.8 and 5.10 are allowed.
+# By default 5.10 will be used.
+if (NOT QT_VERSION)
+    set (QT_VERSION "5.10")
+endif()
+
 # This should care that our CMAKE_INSTALL_PREFIX is absolute at the end...
 get_filename_component(CMAKE_INSTALL_PREFIX
                        ${CMAKE_INSTALL_PREFIX}
