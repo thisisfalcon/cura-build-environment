@@ -60,7 +60,7 @@ ExternalProject_Add_Step(Python ensurepip
 )
 
 ExternalProject_Add_Step(Python upgrade_packages
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install pip==18.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pip==18.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.4.3
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest==3.8.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-cov==2.6.0
