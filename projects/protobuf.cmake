@@ -61,3 +61,38 @@ if(BUILD_OS_WINDOWS)
         INSTALL_COMMAND mingw32-make install
     )
 endif()
+
+# On OSX, if GCC is available, we compile another protobuf with GCC so for CuraEngine,
+# we can use GCC to compile which supports OpenMP.
+if(BUILD_OS_OSX AND OSX_GCC_CXX)
+    set(protobuf_configure_args
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_INSTALL_BINDIR=bin-gcc
+        -DCMAKE_INSTALL_LIBDIR=lib-gcc
+        -DCMAKE_C_COMPILER=${OSX_GCC_C}
+        -DCMAKE_CXX_COMPILER=${OSX_GCC_CXX}
+        -DCMAKE_CXX_FLAGS="--std=c++11"
+        -Dprotobuf_BUILD_TESTS=OFF
+        -Dprotobuf_BUILD_SHARED_LIBS=OFF
+        -Dprotobuf_WITH_ZLIB=OFF
+    )
+
+    if (CMAKE_OSX_DEPLOYMENT_TARGET)
+        list(APPEND protobuf_configure_args
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
+        )
+    endif()
+    if (CMAKE_OSX_SYSROOT)
+        list(APPEND protobuf_configure_args
+            -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
+        )
+    endif()
+
+    ExternalProject_Add(Protobuf-GCC
+        URL https://github.com/google/protobuf/archive/v3.0.2.tar.gz
+        URL_MD5 7349a7f43433d72c6d805c6ca22b7eeb
+        DEPENDS Protobuf
+        CONFIGURE_COMMAND ${CMAKE_COMMAND} ${protobuf_configure_args} -G ${CMAKE_GENERATOR} ../Protobuf-GCC/cmake
+    )
+endif()

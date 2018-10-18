@@ -43,4 +43,39 @@ if(BUILD_OS_WINDOWS)
     SetProjectDependencies(TARGET Arcus-MinGW DEPENDS Sip Protobuf-MinGW Arcus)
 endif()
 
+if (BUILD_OS_OSX AND OSX_GCC_CXX)
+    set (arcus_config_args
+        -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_INSTALL_LIBDIR=lib-gcc
+        -DCMAKE_C_COMPILER=${OSX_GCC_C}
+        -DCMAKE_CXX_COMPILER=${OSX_GCC_CXX}
+        -DCMAKE_CXX_FLAGS="--std=c++11"
+        -DBUILD_STATIC=ON
+        -DBUILD_EXAMPLES=OFF
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DPROTOBUF_LIBRARY=${CMAKE_INSTALL_PREFIX}/lib-gcc/libprotobuf.a
+        -DBUILD_PYTHON=OFF
+        )
+
+    if (CMAKE_OSX_DEPLOYMENT_TARGET)
+        list(APPEND arcus_config_args
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
+        )
+    endif()
+    if (CMAKE_OSX_SYSROOT)
+        list(APPEND arcus_config_args
+            -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
+        )
+    endif()
+
+    ExternalProject_Add(Arcus-GCC
+        GIT_REPOSITORY https://github.com/ultimaker/libArcus.git
+        GIT_TAG origin/${CURA_ARCUS_BRANCH_OR_TAG}
+        CMAKE_COMMAND ${arcus_cmake_command}
+        CMAKE_ARGS ${arcus_config_args}
+    )
+
+    SetProjectDependencies(TARGET Arcus-MinGW DEPENDS Sip Protobuf-MinGW Arcus)
+endif()
+
 
